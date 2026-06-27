@@ -25,7 +25,12 @@ pub struct KeSysTab {
 }
 
 #[repr(C)]
-pub struct Test {}
+pub struct Test {
+    pub test0: usize,
+    pub test1: usize,
+    pub test2: usize,
+    pub test3: usize,
+}
 
 pub macro GSTAB() { unsafe { SYSTAB.0.as_ref_unchecked() }.gstab }
 
