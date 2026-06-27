@@ -8,5 +8,6 @@ meta! { "km-init" }
 
 entry! {
     info!("Hey there!");
-    exit!(0);
+    // exit!(0);
+    panic!("Ouch!");
 }
