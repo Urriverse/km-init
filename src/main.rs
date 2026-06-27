@@ -1,11 +1,12 @@
-#![no_std] #![no_main] #![feature(decl_macro)]
-#[allow(unused)] #[macro_use] extern crate nk;
+#![no_std]
+#![no_main]
 
-meta!
-{
-    "km-init"
-}
+#[macro_use]
+extern crate nk;
+
+meta! { "km-init" }
 
 entry! {
-    panic!("Hey there!");
+    info!("Hey there!");
+    exit!(0);
 }

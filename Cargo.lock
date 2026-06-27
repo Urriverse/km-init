@@ -22,7 +22,7 @@ dependencies = [
 [[package]]
 name = "nk"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/nanokit.git?branch=main#86174f291d197dcccf49b618cbcab942242b8c4e"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#c39b59e634a5db42c7345868fc937bff3e7e8404"
 
 [[package]]
 name = "spin"
