@@ -1,12 +1,11 @@
-#![no_main]
-#![no_std]
-#![allow(unused_features)]
-#![feature(decl_macro)]
+#![no_main]  #![no_std]     // required by environment
+#![feature(decl_macro)]     // required by nanokit
 
-pub mod nk; use nk::*;
+pub mod nk; // include nanokit
 
-pub macro mod_ident() { "km-init" }
+Mod! { "km-init" }  // declare module name (this macro also adds custom prelude)
 
+// entry point
 fn main() -> i32 {
     warn!("Hey there!");
     10
