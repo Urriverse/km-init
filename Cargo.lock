@@ -5,3 +5,11 @@ version = 4
 [[package]]
 name = "km-init"
 version = "0.1.0"
+dependencies = [
+ "nanokit",
+]
+
+[[package]]
+name = "nanokit"
+version = "0.1.0"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#d88cfc9a28d22180d941fd0994dfba4484736544"
