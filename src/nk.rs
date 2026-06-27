@@ -19,25 +19,32 @@ pub struct KeSysTab {
     pub link_guard_get:     fn(&KeSymbolGuard) -> &fn(),
     pub export:             fn(u64, &'static fn()) -> Option<KeSymbol>,
     pub suicide:            fn() -> !,
-    pub log:                fn(u8, &'static str, &'static str, u32, *const ()) -> (),
+    pub log:                fn(u8, &'static str, &'static str, u32, &core::fmt::Arguments) -> (),
 }
 
 pub struct Gall;
 
 unsafe impl core::alloc::GlobalAlloc for Gall {
-    unsafe fn alloc(&self, layout: core::alloc::Layout) -> *mut u8 {
+    unsafe fn alloc(&self, _layout: core::alloc::Layout) -> *mut u8 {
         0 as _
     }
 
-    unsafe fn dealloc(&self, ptr: *mut u8, layout: core::alloc::Layout) {
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: core::alloc::Layout) {
         //
     }
 }
 
-pub macro nano() {
-    #[unsafe(no_mangle)]
-    #[allow(improper_ctypes_definitions)]
-    pub(crate) extern "C" fn _start(st: &crate::nk::KeSysTab) {
-        (st.suicide)()
+#[unsafe(no_mangle)]
+#[allow(improper_ctypes_definitions)]
+pub(crate) extern "C" fn _start(st: &crate::nk::KeSysTab) {
+    (st.log)(3, "km-init", file!(), line!(), &format_args!("Hello, World!"));
+    (st.suicide)();
+}
+
+#[cfg(not(test))]
+#[panic_handler]
+fn _ph(_: &core::panic::PanicInfo) -> ! {
+    loop {
+        //
     }
 }
