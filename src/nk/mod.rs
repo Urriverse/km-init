@@ -4,5 +4,8 @@ pub mod entry;
 pub mod panic;
 pub mod misc;
 pub mod log;
+pub mod sync;
+pub mod ketypes;
+pub mod dl;
 
 pub use kst::Ke;

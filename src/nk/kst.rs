@@ -1,20 +1,11 @@
-pub type KeSymbolHandle = usize;
+use core::sync::atomic::AtomicUsize;
 
-pub type KeSymbolGuard = [usize; 2];
-
-#[repr(C)]
-pub struct KeSymbol {
-    mprc        : *const    core::sync::atomic::AtomicUsize ,
-    rc          :           core::sync::atomic::AtomicUsize ,
-    ptr         : *const    ()                              ,
-    poisonous   :           core::sync::atomic::AtomicBool  ,
-    _pad        :           [u8; 3]                         ,
-    id          :           u64                             ,
-}
+use alloc::collections::btree_map::BTreeMap;
+use crate::nk::{ketypes::{sym::{KeSymbol, KeSymbolGuard, KeSymbolHandle}, task::KeTaskId}, sync::RwLock};
 
 #[repr(C)]
 pub struct KeSysTab {
-    pub link            :   fn(u64) ->  Option<KeSymbolHandle>,
+    pub link            :   fn(u64) -> Option<KeSymbolHandle>,
     pub link_guard      :   fn(&KeSymbolHandle) -> KeSymbolGuard,
     pub link_guard_get  :   fn(&KeSymbolGuard) -> &fn(),
     pub export          :   fn(u64, &'static fn()) -> Option<KeSymbol>,
@@ -23,7 +14,17 @@ pub struct KeSysTab {
     pub panic           :   fn(&core::panic::PanicInfo) -> !,
     pub alloc           :   fn(core::alloc::Layout) -> *mut u8,
     pub free            :   fn(*mut u8, core::alloc::Layout) -> (),
+    pub run_module      :   fn(elf: &[u8]) -> Result<KeTaskId, usize>,
+    pub cprc_inc        :   fn() -> (),
+    pub cprc_dec        :   fn() -> (),
+    pub cprc_load       :   fn() -> usize,
+    pub cprc_store      :   fn(usize) -> (),
+    pub cprc_ref        :   fn() -> &'static AtomicUsize,
+
+    pub gstab           :   &'static RwLock<BTreeMap<u64, KeSymbol>>,
 }
+
+pub macro GSTAB() { unsafe { SYSTAB.0.as_ref_unchecked() }.gstab }
 
 pub struct KeSysTabPtr(pub *const KeSysTab);
 
