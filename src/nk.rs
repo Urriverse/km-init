@@ -20,6 +20,7 @@ pub struct KeSysTab {
     pub export:             fn(u64, &'static fn()) -> Option<KeSymbol>,
     pub suicide:            fn() -> !,
     pub log:                fn(u8, &'static str, &'static str, u32, &core::fmt::Arguments) -> (),
+    pub panic:              fn(&core::panic::PanicInfo) -> !,
 }
 
 pub struct Gall;
@@ -34,17 +35,20 @@ unsafe impl core::alloc::GlobalAlloc for Gall {
     }
 }
 
+unsafe extern "C" { #[allow(improper_ctypes)] #[allow(dead_code)] static SYSTAB: *const KeSysTab; }
+
+pub macro Ke($n:ident $($arg:expr),*) { (unsafe { SYSTAB.as_ref_unchecked() }.$n)($($arg),*) }
+
 #[unsafe(no_mangle)]
 #[allow(improper_ctypes_definitions)]
 pub(crate) extern "C" fn _start(st: &crate::nk::KeSysTab) {
     (st.log)(3, "km-init", file!(), line!(), &format_args!("I not wanna live!"));
-    (st.suicide)();
+    panic!("test panic");
+    // Ke!(suicide);
 }
 
 #[cfg(not(test))]
 #[panic_handler]
-fn _ph(_: &core::panic::PanicInfo) -> ! {
-    loop {
-        //
-    }
+fn _ph(pi: &core::panic::PanicInfo) -> ! {
+    Ke!(panic pi)
 }
