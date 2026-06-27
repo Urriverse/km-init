@@ -1,7 +1,7 @@
 PROFILE ?= debug
 KM_INIT_PROFILE ?= $(PROFILE)
 BUILD_PATH ?= target
-RUSTFLAGS += "-C relocation-model=pie -C code-model=kernel -C no-redzone=y -C link-arg=-Wl,--entry=my_entry"
+RUSTFLAGS += "-C relocation-model=pie -C code-model=kernel -C no-redzone=y -C link-arg=-Wl,--entry=_start"
 
 build:
 	@CARGO_TARGET_DIR="$(BUILD_PATH)" cargo build $(KM_INIT_CARGO_ARGS) --target x86_64-unknown-none
