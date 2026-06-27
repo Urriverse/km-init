@@ -3,6 +3,15 @@ pub struct ModNamePtr(pub *const &'static str);
 unsafe impl Sync for ModNamePtr {}
 
 #[macro_export]
+macro_rules! IMPORT {
+    ($($name:ident: $ty:ty = $def:expr $(;)?)*) => {
+        $(
+            #[unsafe(no_mangle)] pub static $name: $ty = $def;
+        )*
+    }
+}
+
+#[macro_export]
 macro_rules! Mod {
     ($x:expr) => {
         #[allow(unused)]
@@ -11,8 +20,8 @@ macro_rules! Mod {
 
         static __MODNAME: &str = $x;
 
-        #[unsafe(no_mangle)]
-        pub static MODNAME: $crate::nk::misc::ModNamePtr = $crate::nk::misc::ModNamePtr(core::ptr::addr_of!(__MODNAME));
+        // #[unsafe(no_mangle)] pub static MODNAME: $crate::nk::misc::ModNamePtr = $crate::nk::misc::ModNamePtr(core::ptr::addr_of!(__MODNAME));
+        crate::IMPORT! { MODNAME: $crate::nk::misc::ModNamePtr = $crate::nk::misc::ModNamePtr(core::ptr::addr_of!(__MODNAME)) }
 
         pub macro mod_ident() {
             $x

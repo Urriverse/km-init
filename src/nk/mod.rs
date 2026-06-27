@@ -2,7 +2,7 @@ pub mod kst;
 pub mod ga;
 pub mod entry;
 pub mod panic;
-pub mod misc;
+#[macro_use] pub mod misc;
 pub mod log;
 pub mod sync;
 pub mod ketypes;
