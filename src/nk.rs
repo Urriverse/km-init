@@ -37,7 +37,7 @@ unsafe impl core::alloc::GlobalAlloc for Gall {
 #[unsafe(no_mangle)]
 #[allow(improper_ctypes_definitions)]
 pub(crate) extern "C" fn _start(st: &crate::nk::KeSysTab) {
-    (st.log)(3, "km-init", file!(), line!(), &format_args!("Hello, World!"));
+    (st.log)(3, "km-init", file!(), line!(), &format_args!("I not wanna live!"));
     (st.suicide)();
 }
 
