@@ -2,9 +2,9 @@
 
 #[allow(unused)] #[macro_use] extern crate nk;
 
-meta!("km-init");
+nk::util::meta!("km-init");
 
-#[cfg(not(test))] panic_handler![];
+#[cfg(not(test))] nk::macros::panic_handler![];
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() {
