@@ -5,7 +5,7 @@
 meta!("km-init");
 
 // entry point
-fn main() {
+entry! {
     // greetings
     warn!("Hey there!");
 }
