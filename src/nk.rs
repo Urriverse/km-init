@@ -35,9 +35,14 @@ unsafe impl core::alloc::GlobalAlloc for Gall {
     }
 }
 
-unsafe extern "C" { #[allow(improper_ctypes)] #[allow(dead_code)] static SYSTAB: *const KeSysTab; }
+struct KeSysTabPtr(pub *const KeSysTab);
 
-pub macro Ke($n:ident $($arg:expr),*) { (unsafe { SYSTAB.as_ref_unchecked() }.$n)($($arg),*) }
+unsafe impl Sync for KeSysTabPtr {}
+
+#[unsafe(no_mangle)]
+static SYSTAB: KeSysTabPtr = KeSysTabPtr(core::ptr::null());
+
+pub macro Ke($n:ident $($arg:expr),*) { (unsafe { SYSTAB.0.as_ref_unchecked() }.$n)($($arg),*) }
 
 #[unsafe(no_mangle)]
 #[allow(improper_ctypes_definitions)]
