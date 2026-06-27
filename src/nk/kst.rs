@@ -34,4 +34,6 @@ crate::IMPORT! {
     pub TEST: Test [TestPtr] = TestPtr(core::ptr::null());
 }
 
+#[unsafe(no_mangle)] pub static CHECKME: usize = 0;
+
 pub macro Ke ( $n:ident $( $arg:expr ),* ) { ( unsafe { SYSTAB.0.as_ref_unchecked() }.$n )( $($arg),* ) }
