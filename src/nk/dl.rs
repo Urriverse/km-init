@@ -32,3 +32,30 @@ pub fn link(id: u64) -> Option<KeSymbolHandle> {
     }
     None
 }
+
+#[macro_export]
+macro_rules! dlexport {
+    (@ $name:expr => $val:expr) => {
+        $crate::nk::dl::export(hash!($name), &$val)
+    };
+    ($name:expr => $val:expr) => {
+        $crate::nk::dl::export($name, $val)
+    };
+}
+
+#[macro_export]
+macro_rules! dlink {
+    (@ $name:expr ; $err:expr) => {
+        $crate::nk::dl::link(hash!($name)).expect($err)
+    };
+    ($name:expr ; $err:expr) => {
+        $crate::nk::dl::link($name).expect($err)
+    };
+}
+
+#[macro_export]
+macro_rules! dluse {
+    ($sym:expr => $ty:ty) => {
+        ($sym.get().get::<$ty>())
+    };
+}
