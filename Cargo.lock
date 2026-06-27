@@ -12,4 +12,4 @@ dependencies = [
 [[package]]
 name = "nanokit"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/nanokit.git?branch=main#d88cfc9a28d22180d941fd0994dfba4484736544"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#e74a8b0c6122487eb0faeb0b7addc6c52cb3e842"
