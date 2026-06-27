@@ -30,9 +30,11 @@ pub struct KeSysTabPtr(pub *const KeSysTab);
 
 unsafe impl Sync for KeSysTabPtr {}
 
+fn x(){}
+
 crate::IMPORT! {
     SYSTAB: KeSysTabPtr = KeSysTabPtr(core::ptr::null());
-    FN: fn() -> () = ||();
+    FN: &fn() = &(x as fn());
 }
 
 pub macro Ke ( $n:ident $( $arg:expr ),* ) {
