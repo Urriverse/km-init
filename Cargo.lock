@@ -7,6 +7,7 @@ name = "km-init"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
+ "nk",
 ]
 
 [[package]]
@@ -17,6 +18,11 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 dependencies = [
  "spin",
 ]
+
+[[package]]
+name = "nk"
+version = "0.1.0"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#afc8b0eaa9346fee27d775ec919b4b543e38f266"
 
 [[package]]
 name = "spin"

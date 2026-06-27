@@ -1,13 +1,11 @@
-#![no_main]  #![no_std]     // required by environment
-#![feature(decl_macro)]     // required by nanokit
+#![no_std] #![no_main] #![feature(decl_macro)]
 
-#[macro_use] pub mod nk; // include nanokit
+#[allow(unused)] #[macro_use] extern crate nk;
 
-Mod! { "km-init" }  // declare module name (this macro also adds custom prelude)
+meta!("km-init");
 
 // entry point
-fn main() -> i32 {
+fn main() {
     // greetings
     warn!("Hey there!");
-    10
 }
