@@ -1,16 +1,10 @@
 #![no_main]
 #![no_std]
+#![feature(decl_macro)]
 
-// #[allow(unused)] #[macro_use] pub extern crate nanokit;
+pub mod nk;
 
-// allocator!{}
-
-#[unsafe(no_mangle)]
-pub unsafe extern "C" fn _start() {
-    loop {
-        //
-    }
-}
+nk::nano!{}
 
 #[cfg(not(test))]
 #[panic_handler]
