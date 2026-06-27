@@ -1,4 +1,4 @@
-use core::{ptr::addr_of, sync::atomic::AtomicUsize};
+use core::sync::atomic::AtomicUsize;
 
 use alloc::collections::btree_map::BTreeMap;
 use crate::nk::{ketypes::{sym::{KeSymbol, KeSymbolGuard, KeSymbolHandle}, task::KeTaskId}, sync::RwLock};
@@ -24,27 +24,14 @@ pub struct KeSysTab {
     pub gstab           :   &'static RwLock<BTreeMap<u64, KeSymbol>>,
 }
 
-pub macro GSTAB() { unsafe { SYSTAB.0.as_ref_unchecked() }.gstab }
+#[repr(C)]
+pub struct Test {}
 
-fn x_(){}
-static X: fn() = x_ as fn();
+pub macro GSTAB() { unsafe { SYSTAB.0.as_ref_unchecked() }.gstab }
 
 crate::IMPORT! {
     pub SYSTAB: KeSysTab [KeSysTabPtr] = KeSysTabPtr(core::ptr::null());
-    pub FN: fn() [FnPtr] = FnPtr(addr_of!(X));
+    pub TEST: Test [TestPtr] = TestPtr(core::ptr::null());
 }
 
-pub macro Ke ( $n:ident $( $arg:expr ),* ) {
-    (
-        unsafe {
-            SYSTAB
-                .0
-                .as_ref_unchecked()
-        }.$n
-    )
-    (
-        $(
-            $arg
-        ),*
-    )
-}
+pub macro Ke ( $n:ident $( $arg:expr ),* ) { ( unsafe { SYSTAB.0.as_ref_unchecked() }.$n )( $($arg),* ) }
