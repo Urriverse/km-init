@@ -4,8 +4,8 @@
 
 meta!("km-init");
 
-// entry point
-entry! {
+#[unsafe(no_mangle)]
+pub fn module_start() {
     // greetings
     warn!("Hey there!");
     nk::exit!();
