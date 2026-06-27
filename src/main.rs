@@ -4,9 +4,11 @@
 
 meta!("km-init");
 
+#[cfg(not(test))] panic_handler![];
+
 #[unsafe(no_mangle)]
-pub fn module_start() {
+pub extern "C" fn _start() {
     // greetings
-    warn!("Hey there!");
-    nk::exit!();
+    panic!("Hey there!");
+    // nk::exit!();
 }
