@@ -8,4 +8,5 @@ meta!("km-init");
 entry! {
     // greetings
     warn!("Hey there!");
+    nk::exit!();
 }
