@@ -4,9 +4,13 @@ unsafe impl Sync for ModNamePtr {}
 
 #[macro_export]
 macro_rules! IMPORT {
-    ($($name:ident: $ty:ty = $def:expr $(;)?)*) => {
+    ($($vis:vis $name:ident: $ty:ty [$pty:ident] = $def:expr $(;)?)*) => {
         $(
-            #[unsafe(no_mangle)] pub static $name: $ty = $def;
+            #[allow(dead_code)]
+            $vis struct $pty(pub *const $ty);
+            unsafe impl Sync for $pty {}
+            unsafe impl Send for $pty {}
+            #[unsafe(no_mangle)] $vis static $name: $pty = $def;
         )*
     }
 }
@@ -21,7 +25,9 @@ macro_rules! Mod {
         static __MODNAME: &str = $x;
 
         // #[unsafe(no_mangle)] pub static MODNAME: $crate::nk::misc::ModNamePtr = $crate::nk::misc::ModNamePtr(core::ptr::addr_of!(__MODNAME));
-        crate::IMPORT! { MODNAME: $crate::nk::misc::ModNamePtr = $crate::nk::misc::ModNamePtr(core::ptr::addr_of!(__MODNAME)) }
+        crate::IMPORT! {
+            MODNAME: &'static str [ModNamePtr] = ModNamePtr(core::ptr::addr_of!(__MODNAME));
+        }
 
         pub macro mod_ident() {
             $x
