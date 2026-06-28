@@ -44,7 +44,7 @@ dependencies = [
 [[package]]
 name = "nk"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/nanokit.git?branch=main#6f8a08adaf2b4203cf256b31684c4439e60f13a0"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#5b72bfb768dda3b0a24909dc19a9125cd2deaa57"
 dependencies = [
  "ketypes",
 ]
