@@ -17,10 +17,11 @@ checksum = "37eb048fb996ff4a7450fa8cfe253456c03a2f0cf9e5f01fc5617f7d3105ae15"
 [[package]]
 name = "ketypes"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/ketypes.git?branch=main#8fca54a07206f1734f5408515d1d9cc60549d55c"
+source = "git+https://github.com/Urriverse/ketypes.git?branch=main#ced88b54dacd2571ca05cbdb6fa7fc5745fe7865"
 dependencies = [
  "bitflags",
  "extrum",
+ "paste",
 ]
 
 [[package]]
@@ -44,10 +45,16 @@ dependencies = [
 [[package]]
 name = "nk"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/nanokit.git?branch=main#5b72bfb768dda3b0a24909dc19a9125cd2deaa57"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#e35020fcb38b3f4208704d7cc51951ab39f9e3a0"
 dependencies = [
  "ketypes",
 ]
+
+[[package]]
+name = "paste"
+version = "1.0.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
 name = "spin"
