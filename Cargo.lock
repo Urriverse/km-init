@@ -3,9 +3,31 @@
 version = 4
 
 [[package]]
+name = "bitflags"
+version = "2.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b4388bee8683e3d04af747c73422af53102d2bd24d9eadb6cbc100baef4b43f8"
+
+[[package]]
+name = "extrum"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "37eb048fb996ff4a7450fa8cfe253456c03a2f0cf9e5f01fc5617f7d3105ae15"
+
+[[package]]
+name = "ketypes"
+version = "0.1.0"
+source = "git+https://github.com/Urriverse/ketypes.git?branch=main#8fca54a07206f1734f5408515d1d9cc60549d55c"
+dependencies = [
+ "bitflags",
+ "extrum",
+]
+
+[[package]]
 name = "km-init"
 version = "0.1.0"
 dependencies = [
+ "ketypes",
  "lazy_static",
  "nk",
 ]
@@ -22,7 +44,10 @@ dependencies = [
 [[package]]
 name = "nk"
 version = "0.1.0"
-source = "git+https://github.com/Urriverse/nanokit.git?branch=main#c39b59e634a5db42c7345868fc937bff3e7e8404"
+source = "git+https://github.com/Urriverse/nanokit.git?branch=main#21066456cf93da7a24ce377e62e1e5b554a07bb8"
+dependencies = [
+ "ketypes",
+]
 
 [[package]]
 name = "spin"
