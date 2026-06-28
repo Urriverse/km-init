@@ -1,8 +1,5 @@
-#![no_std]
-#![no_main]
-
-#[macro_use]
-extern crate nk;
+#![no_std] #![no_main]
+#[macro_use] extern crate nk;
 
 meta! { "km-init" }
 
