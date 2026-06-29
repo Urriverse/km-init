@@ -21,6 +21,8 @@ entry! {
     trace!("*");
 
     let y = nk::KeVtDeviceNew("kbd0");
+
+    trace!("@");
     
     if let Some(x) = y {
         let _ = x;
@@ -28,6 +30,8 @@ entry! {
     } else {
         error!("Failed to create KeDevice `kbd0`!");
     }
+
+    trace!("$");
     
     exit!(1488);
 }
