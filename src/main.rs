@@ -8,7 +8,7 @@ type KeTest = fn();
 nk::Ke! { KeTest or || () }
 
 entry! {
-    info!("Hey there!");
+    info!("Hey there! KeTest = {:p}", KeTest);
 
     KeTest();
     
