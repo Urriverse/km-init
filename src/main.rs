@@ -1,4 +1,4 @@
-#![no_std] #![no_main] #![crate_type = "dylib"]
+#![no_std] #![no_main] // #![crate_type = "dylib"]
 #[macro_use] extern crate nk;
 
 meta! { "km-init" }
