@@ -19,8 +19,10 @@ entry! {
     KeTest();
 
     trace!("*");
+
+    let y = nk::KeVtDeviceNew("kbd0");
     
-    if let Some(x) = nk::KeVtDeviceNew("kbd0") {
+    if let Some(x) = y {
         let _ = x;
         // info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
     } else {
