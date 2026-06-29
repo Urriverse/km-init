@@ -21,7 +21,8 @@ entry! {
     trace!("*");
     
     if let Some(x) = nk::KeVtDeviceNew("kbd0") {
-        info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
+        let _ = x;
+        // info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
     } else {
         error!("Failed to create KeDevice `kbd0`!");
     }
