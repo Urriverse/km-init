@@ -13,6 +13,8 @@ entry! {
     info!("KeMonLog = {:p}, * {:p}", nk::KeMonLog, *unsafe { (nk::KeMonLog as *const *const ()).as_ref_unchecked() });
 
     KeTest();
+
+    trace!("*");
     
     if let Some(x) = nk::KeVtDeviceNew("kbd0") {
         info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
