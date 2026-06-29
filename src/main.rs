@@ -9,8 +9,8 @@ nk::Ke! { KeTest or || () }
 
 entry! {
     info!("Hey there!");
-    info!("KeTest   = {:p}", KeTest);
-    info!("KeMonLog = {:p}", nk::KeMonLog);
+    info!("KeTest   = {:p}, * {:p}", KeTest, *unsafe { (KeTest as *const *const ()).as_ref_unchecked() });
+    info!("KeMonLog = {:p}, * {:p}", nk::KeMonLog, *unsafe { (nk::KeMonLog as *const *const ()).as_ref_unchecked() });
 
     KeTest();
     
