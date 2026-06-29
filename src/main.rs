@@ -12,6 +12,10 @@ entry! {
     info!("KeTest   = {:p}, * {:p}", KeTest, *unsafe { (KeTest as *const *const ()).as_ref_unchecked() });
     info!("KeMonLog = {:p}, * {:p}", nk::KeMonLog, *unsafe { (nk::KeMonLog as *const *const ()).as_ref_unchecked() });
 
+    trace!("#");
+
+    nk::KeExecYield();
+
     KeTest();
 
     trace!("*");
