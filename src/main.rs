@@ -16,6 +16,8 @@ entry! {
 
     nk::KeExecYield();
 
+    trace!("~");
+
     KeTest();
 
     trace!("*");
