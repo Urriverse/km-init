@@ -1,13 +1,11 @@
-#![no_std] #![no_main]
-
-#[macro_use] extern crate nk;
-
-meta! { "km-init" }
+#![no_std] #![no_main] #[macro_use] extern crate nk;
 
 entry! {
+    mod "km-init";
+
     info!("Hey there!");
 
-    nk::KeExecYield();
+    nk::ExecYield();
 
     let y = nk::Device::new("kbd0");
     
