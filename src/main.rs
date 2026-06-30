@@ -1,15 +1,18 @@
-#![no_std] #![no_main] // #![crate_type = "dylib"]
+#![no_std] #![no_main]
+
 #[macro_use] extern crate nk;
 
 meta! { "km-init" }
 
-type KeTest = fn();
+// type KeTest = fn();
 
-nk::Ke! { KeTest or || () }
+// nk::Ke! { KeTest or || () }
+
+unsafe extern "Rust" { fn KeTest(); }
 
 entry! {
     info!("Hey there!");
-    info!("KeTest   = {:p}, * {:p}", KeTest, *unsafe { (KeTest as *const *const ()).as_ref_unchecked() });
+    info!("KeTest   = {:p}, * {:p}", KeTest as *const fn(), *unsafe { (KeTest as *const *const ()).as_ref_unchecked() });
     info!("KeMonLog = {:p}, * {:p}", nk::KeMonLog, *unsafe { (nk::KeMonLog as *const *const ()).as_ref_unchecked() });
 
     trace!("#");
@@ -18,7 +21,7 @@ entry! {
 
     trace!("~");
 
-    KeTest();
+    unsafe { KeTest(); }
 
     trace!("*");
 
