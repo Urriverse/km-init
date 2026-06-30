@@ -8,7 +8,8 @@ meta! { "km-init" }
 
 // nk::Ke! { KeTest or || () }
 
-unsafe extern "Rust" { fn KeTest(); }
+#[allow(non_snake_case)]
+unsafe extern "Rust" fn KeTest() { panic!("Failed to link KeTest") }
 
 entry! {
     info!("Hey there!");
