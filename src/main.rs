@@ -9,7 +9,7 @@ entry! {
 
     nk::KeExecYield();
 
-    let y = nk::KeDevice::new("kbd0");
+    let y = nk::Device::new("kbd0");
     
     if let Some(x) = y {
         let _ = x;
