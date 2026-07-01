@@ -1,11 +1,17 @@
-#![no_std] #![no_main] #[macro_use] extern crate nk;
+#![no_std] #![no_main] #[macro_use] extern crate nk; use ketypes::*;
+
+Import! {
+    pub fn ExecYield() where kernel 0.0 {
+        error!("ExecYield not provided");
+    }
+}
 
 entry! {
     mod "km-init";
 
-    info!("Hey there!");
+    ExecYield();
 
-    nk::ExecYield();
+    info!("Hey there!");
 
     let y = nk::Device::new("kbd0");
     
