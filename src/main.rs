@@ -7,14 +7,14 @@ entry! {
 
     info!("Hey there!");
 
-    // let y = nk::Device::new("kbd0");
+    let y = nk::Device::new("kbd0");
     
-    // if let Some(x) = y {
-    //     let _ = x;
-    //     info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
-    // } else {
-    //     error!("Failed to create KeDevice `kbd0`!");
-    // }
+    if let Some(x) = y {
+        let _ = x;
+        info!("Success: created KeDevice `kbd0`! :: {:p}", core::ptr::addr_of!(x));
+    } else {
+        error!("Failed to create KeDevice `kbd0`!");
+    }
     
     exit!(1488);
 }
